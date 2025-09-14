@@ -1,9 +1,9 @@
-Name: GAMPALA VARSHITHA
-Company:ALFIDO TECH 
-ID: BS/REG/110324
-Domain:Artificial Intelligence Intern
-Duration:01 Sep 2025
-Mentor:Akash Dubey –
+**Name:** GAMPALA VARSHITHA
+**Company:** ALFIDO TECH 
+**ID:** BS/REG/110324
+**Domain:**Artificial Intelligence Intern
+**Duration:** 01 Sep 2025
+**Mentor:** Akash Dubey –
  Overview of the project
   PROJECT 
  Data Preprocessing
