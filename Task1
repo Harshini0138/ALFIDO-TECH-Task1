@@ -1,0 +1,61 @@
+
+DATA PREPROCESSING
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
+from sklearn.impute import SimpleImputer
+
+# Load dataset
+df = pd.read_csv('your_dataset.csv')
+
+# --- Data Cleaning ---
+# View basic info
+print(df.info())
+print(df.describe())
+
+# Handle missing values
+imputer = SimpleImputer(strategy='mean')
+df_numeric = df.select_dtypes(include=[np.number])
+df[df_numeric.columns] = imputer.fit_transform(df_numeric)
+
+# Drop duplicate rows
+df = df.drop_duplicates()
+
+# Convert column formats (example: 'date_column')
+df['date_column'] = pd.to_datetime(df['date_column'], errors='coerce')
+
+# Standardize string columns and remove trailing spaces
+for col in df.select_dtypes(include='object').columns:
+    df[col] = df[col].str.strip().str.lower()
+
+# --- Feature Encoding ---
+# Encode categorical columns
+le = LabelEncoder()
+categorical_cols = df.select_dtypes(include='object').columns
+for col in categorical_cols:
+    df[col] = le.fit_transform(df[col].astype(str))
+
+# --- Data Normalization ---
+scaler = MinMaxScaler()  # or StandardScaler()
+df[df_numeric.columns] = scaler.fit_transform(df[df_numeric.columns])
+
+# --- Final Preparation ---
+# Separate features & target (example: target column 'label')
+X = df.drop('label', axis=1)
+y = df['label']
+
+print(X.head())
+print(y.head())
+
+
+OUTPUT
+[[ 0.15  0.88  1.0 ... ]
+ [ 0.47  0.34  0.0 ... ]]
+scaled_features_df.head
+col1	col2	col3	col4
+-1.89	0.05	1.74	0.46
+1.27	-1.35	0.82	0.59
+0.93	0.38	-0.61	0.59
+
+
